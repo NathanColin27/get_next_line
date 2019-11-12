@@ -6,7 +6,7 @@
 /*   By: ncolin <ncolin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/12 09:55:45 by ncolin            #+#    #+#             */
-/*   Updated: 2019/11/12 10:36:40 by ncolin           ###   ########.fr       */
+/*   Updated: 2019/11/12 19:17:29 by ncolin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,22 +28,55 @@ size_t		ft_strlen(const char *str)
 
 char	*ft_substr(char const *s, unsigned int start, size_t len)
 {
-	char		*str;
-	size_t		i;
-	int			l;
+	char	*result;
+	size_t	i;
 
-	i = start;
-	l = len;
-	if (!s || ft_strlen(s) < i)
-		return (NULL);
-	if (!(str = (char*)malloc(sizeof(char) * (len + 1))))
-		return (NULL);
-	while (len-- > 0 && *s)
+	i = 0;
+	if ((result = (char *)malloc(sizeof(char) * (len + 1))) != 0)
 	{
-		*str = s[i];
-		i++;
+		if (start < ft_strlen(s))
+			while (i < len && *(s + start + i))
+			{
+				result[i] = *(s + start + i);
+				i++;
+			}
+		result[i] = '\0';
+	}
+	return (result);
+}
+
+char	*ft_strjoin(char const *s1, char const *s2)
+{
+	char	*str;
+	int		total;
+	int		i;
+
+	i = 0;
+	if (!s1 || !s2)
+		return (NULL);
+	total = ft_strlen(s1) + ft_strlen(s2) + 1;
+	if (!(str = (char*)malloc(total * sizeof(char))))
+		return (NULL);
+	while (*s1)
+		str[i++] = *s1++;
+	while (*s2)
+		str[i++] = *s2++;
+	str[i] = '\0';
+	return (str);
+}
+
+char	*ft_strchr(char const *str, int c)
+{
+	char a;
+
+	a = c;
+	while (*str)
+	{
+		if (*str == a)
+			return (char *)(str);
 		str++;
 	}
-	*str = '\0';
-	return (str - l);
+	if (*str == a)
+		return (char *)(str);
+	return (NULL);
 }
