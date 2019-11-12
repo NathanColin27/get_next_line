@@ -231,17 +231,9 @@ int   main(int ac, char **av)
   printf("%s\n", line);
   get_next_line(fd1, &line);
   printf("%s\n", line);
-  get_next_line(fd2, &line);
-  printf("%s\n", line);
-  get_next_line(fd2, &line);
-  printf("%s\n", line);
   get_next_line(fd1, &line);
   printf("%s\n", line);
-  get_next_line(fd2, &line);
-  printf("%s\n", line);
   get_next_line(fd1, &line);
-  printf("%s\n", line);
-  get_next_line(fd2, &line);
   printf("%s\n", line);
   return (0);
-}
+} 
