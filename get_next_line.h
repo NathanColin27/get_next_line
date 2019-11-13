@@ -6,13 +6,13 @@
 /*   By: ncolin <ncolin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/12 18:42:40 by ncolin            #+#    #+#             */
-/*   Updated: 2019/11/12 19:19:33 by ncolin           ###   ########.fr       */
+/*   Updated: 2019/11/13 13:53:59 by ncolin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef GET_NEXT_LINE_H
 #define GET_NEXT_LINE_H
-#define BUFFER_SIZE 3
+#define BUFFER_SIZE 4
 #include <stdio.h>
 #include <string.h>
 #include <fcntl.h>

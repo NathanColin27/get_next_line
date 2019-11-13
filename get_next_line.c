@@ -6,11 +6,34 @@
 /*   By: ncolin <ncolin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/12 09:55:48 by ncolin            #+#    #+#             */
-/*   Updated: 2019/11/12 19:21:31 by ncolin           ###   ########.fr       */
+/*   Updated: 2019/11/13 14:26:14 by ncolin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "get_next_line.h"
+
+static int add_line(char **tab, char **line)
+{
+	int len;
+	char *tmp;
+	len = 0;
+	while ((*tab)[len] != '\0' && (*tab)[len] != '\n')
+	{
+		len++;
+	}
+	if ((*tab)[len] == '\n')
+	{
+		*line = ft_substr(*tab, 0, len);
+		tmp = ft_strdup(&((*tab)[len + 1]));
+		free(*tab);
+		*tab = tmp;
+	}
+	else 
+	{
+		*line = ft_strdup(*tab);
+	}
+	return 1;
+}
 
 int get_next_line(int fd, char **line)
 {
@@ -21,11 +44,13 @@ int get_next_line(int fd, char **line)
 
 	if(fd < 0 || line == NULL)
 		return (-1);
-	while(ret = read(fd, buf, BUFFER_SIZE) > 0)
+	while((ret = read(fd, buf, BUFFER_SIZE)))
 	{
 		buf[ret] = '\0';
 		if(tab[fd] == NULL)
+		{
 			tab[fd] = ft_strdup(buf);
+		}
 		else
 		{
 			tmp = ft_strjoin(tab[fd], buf);
@@ -35,11 +60,31 @@ int get_next_line(int fd, char **line)
 		if(ft_strchr(tab[fd], '\n'))
 			break;
 	}
-	
+	add_line(&tab[fd], line);
+	return (1);
 }
 
-int get_line(char **tab, char **line)
+
+
+int   main(int ac, char **av)
 {
-	int len;
-	char *tmp;
-}
+  char  *line;
+  int   fd1;
+  int   fd2;
+
+  fd1 = open(av[1], O_RDONLY);
+  fd2 = open(av[2], O_RDONLY);
+  get_next_line(fd2, &line);
+  printf("%s\n", line);
+  get_next_line(fd2, &line);
+  printf("%s\n", line);
+  get_next_line(fd2, &line);
+  printf("%s\n", line);
+  get_next_line(fd2, &line);
+  printf("%s\n", line);
+  get_next_line(fd2, &line);
+  printf("%s\n", line);
+  get_next_line(fd2, &line);
+  printf("%s\n", line);
+  return (0);
+ }
