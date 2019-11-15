@@ -6,12 +6,21 @@
 /*   By: ncolin <ncolin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/12 09:55:45 by ncolin            #+#    #+#             */
-/*   Updated: 2019/11/13 13:37:52 by ncolin           ###   ########.fr       */
+/*   Updated: 2019/11/15 11:39:37 by ncolin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <stdio.h>
 #include <unistd.h>
+#include <stdlib.h>
+
+
+void	del_tab(char **tab)
+{
+	if (tab != NULL && *tab != NULL)
+		free(*tab);
+		*tab = NULL;
+}
 
 size_t		ft_strlen(const char *str)
 {
