@@ -6,7 +6,7 @@
 /*   By: ncolin <ncolin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/12 09:55:48 by ncolin            #+#    #+#             */
-/*   Updated: 2019/11/15 12:14:51 by ncolin           ###   ########.fr       */
+/*   Updated: 2019/11/18 16:32:39 by ncolin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@ static int add_line(char **tab, char **line)
 	else 
 	{
 		*line = ft_strdup(*tab);
-		del_tab(tab);
+			del_tab(tab);
 	}
 	return (1);
 }
@@ -43,12 +43,12 @@ int get_next_line(int fd, char **line)
 	char 		buf[BUFFER_SIZE + 1];
 	static char *tab[OPEN_MAX]; 
 	char 		*tmp;
-	*line  = "";
+	
+	free(*line);
 	if(fd < 0 || line == NULL)
 		return (-1);
 	while((ret = read(fd, buf, BUFFER_SIZE)) > 0)
 	{
-		printf("ret = %d\n", ret);
 		buf[ret] = '\0';
 		if(tab[fd] == NULL)
 		{
@@ -74,19 +74,20 @@ int get_next_line(int fd, char **line)
 
 
 
-int   main(int ac, char **av)
-{
-  char  *line;
-  int   fd1;
-  int   fd2;
+// int   main(int ac, char **av)
+// {
+//   char  *line;
+//   int   fd1;
+//   int   fd2;
+//   int 	res;
+//   int i;
 
-  fd1 = open(av[1], O_RDONLY);
-  fd2 = open(av[2], O_RDONLY);
-  get_next_line(fd1, &line);
-  printf("%s\n", line);
-  get_next_line(fd1, &line);
-  printf("%s\n", line);
-  get_next_line(fd1, &line);
-  printf("%s\n", line);
-  return (0);
- }
+//   fd1 = open(av[1], O_RDONLY);
+//   fd2 = open(av[2], O_RDONLY);
+//   res = get_next_line(fd1, &line);
+//   while ((i = get_next_line(fd1, &line)) > 0)
+//         {
+//                 printf("|%s\n", line);
+//         }
+//   return (0);
+//  }
