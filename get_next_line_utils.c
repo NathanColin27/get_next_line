@@ -6,7 +6,7 @@
 /*   By: ncolin <ncolin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/12 09:55:45 by ncolin            #+#    #+#             */
-/*   Updated: 2019/11/18 16:34:13 by ncolin           ###   ########.fr       */
+/*   Updated: 2019/11/18 19:41:52 by ncolin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,9 +14,9 @@
 
 void	del_tab(char **tab)
 {
-	if (tab != NULL && *tab != NULL)
+	if (*tab != NULL)
 		free(*tab);
-		*tab = NULL;
+	*tab = NULL;
 }
 
 size_t		ft_strlen(const char *str)

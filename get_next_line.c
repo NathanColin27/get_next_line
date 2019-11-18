@@ -6,7 +6,7 @@
 /*   By: ncolin <ncolin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/12 09:55:48 by ncolin            #+#    #+#             */
-/*   Updated: 2019/11/18 16:32:39 by ncolin           ###   ########.fr       */
+/*   Updated: 2019/11/18 20:47:06 by ncolin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,22 +17,23 @@ static int add_line(char **tab, char **line)
 	int len;
 	char *tmp;
 	len = 0;
-
 	while ((*tab)[len] != '\0' && (*tab)[len] != '\n')
 		len++;
 	if ((*tab)[len] == '\n')
 	{
 		*line = ft_substr(*tab, 0, len);
 		tmp = ft_strdup(&((*tab)[len + 1]));
-		free(*tab);
+		//free(*tab);
 		*tab = tmp;
 		if ((*tab)[0] == '\0')
-			del_tab(tab);
+		{
+			//del_tab(tab);
+		}
 	}
 	else 
 	{
 		*line = ft_strdup(*tab);
-			del_tab(tab);
+		del_tab(tab);
 	}
 	return (1);
 }
@@ -41,12 +42,14 @@ int get_next_line(int fd, char **line)
 {
 	int 		ret;
 	char 		buf[BUFFER_SIZE + 1];
-	static char *tab[OPEN_MAX]; 
+	static char *tab[OPEN_MAX];
 	char 		*tmp;
 	
-	free(*line);
-	if(fd < 0 || line == NULL)
+	
+	if(fd < 0 || !line || BUFFER_SIZE < 1 )
 		return (-1);
+	// if (!tab[fd] && !(tab[fd] = calloc(1, sizeof(char *))))
+	// 	return (-1);
 	while((ret = read(fd, buf, BUFFER_SIZE)) > 0)
 	{
 		buf[ret] = '\0';
@@ -57,7 +60,6 @@ int get_next_line(int fd, char **line)
 		else
 		{
 			tmp = ft_strjoin(tab[fd], buf);
-			free(tab[fd]);
 			tab[fd] = tmp;
 		}
 		if(ft_strchr(tab[fd], '\n'))
@@ -65,29 +67,14 @@ int get_next_line(int fd, char **line)
 	}
 	if (ret < 0)
 		return (-1);
-	else if (ret == 0 && tab[fd] == NULL)
+	else if (ret <= 0 && tab[fd] == NULL)
+	{
+		free(line);
 		return (0);
+	}
 	else
+	{
 		add_line(&tab[fd], line);
+	}
 	return (1);
 }
-
-
-
-// int   main(int ac, char **av)
-// {
-//   char  *line;
-//   int   fd1;
-//   int   fd2;
-//   int 	res;
-//   int i;
-
-//   fd1 = open(av[1], O_RDONLY);
-//   fd2 = open(av[2], O_RDONLY);
-//   res = get_next_line(fd1, &line);
-//   while ((i = get_next_line(fd1, &line)) > 0)
-//         {
-//                 printf("|%s\n", line);
-//         }
-//   return (0);
-//  }
