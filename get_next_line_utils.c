@@ -6,17 +6,51 @@
 /*   By: ncolin <ncolin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/12 09:55:45 by ncolin            #+#    #+#             */
-/*   Updated: 2019/11/18 19:41:52 by ncolin           ###   ########.fr       */
+/*   Updated: 2019/11/25 12:18:23 by ncolin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "get_next_line.h"
 
-void	del_tab(char **tab)
+void	ft_bzero(void *s, size_t n)
 {
+	size_t			i;
+	unsigned char	*p;
+
+	p = s;
+	i = 0;
+	while (i < n)
+	{
+		p[i] = 0;
+		i++;
+	}
+}
+
+
+void	*ft_calloc(size_t count, size_t size)
+{
+	void	*mem;
+	size_t	i;
+	char	*s;
+
+	i = 0;
+	if (!(mem = malloc(count * size)))
+		return (NULL);
+	s = mem;
+	while (i < count * size)
+	{
+		s[i] = 0;
+		i++;
+	}
+	return (mem);
+}
+
+int	del_tab(char **tab)
+{	
 	if (*tab != NULL)
 		free(*tab);
 	*tab = NULL;
+	return (-1);
 }
 
 size_t		ft_strlen(const char *str)
@@ -75,6 +109,8 @@ char	*ft_strchr(char const *str, int c)
 {
 	char a;
 
+	if(!str)
+		return (NULL);
 	a = c;
 	while (*str)
 	{
