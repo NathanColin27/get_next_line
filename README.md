@@ -6,5 +6,7 @@ As you call the function again will read the next line, and so on.
 
 Return values :
 `1`  Line read.
+
 `0`  EOF reached.
+
 `-1` Error occured.
